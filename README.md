@@ -19,27 +19,14 @@ agent-skills/
 
 **通用项目 AI 文档初始化技能**
 
-通过分析项目特点，自动生成一套 AI 友好的文档体系，包括场景化导航、最佳实践规范和代码模板。适用于任何技术栈的项目。
-
-**触发词：**
-
-- 初始化项目文档
-- 创建 AI 开发文档
-- 初始化 AI 文档
-- 设置项目文档结构
-- 项目文档初始化
-- initialize project documentation
-- create project docs
-- AI documentation setup
+自动分析项目，生成包含行为准则、AI工作原则、场景化导航的 CLAUDE.md 及配套子文档。适用于任何技术栈的项目。
 
 **功能特点：**
 
 - 自动识别技术栈（Vue/React/Node等）
-- 生成 CLAUDE.md 主索引文档（含技术栈概览）
-- 创建 docs/ 目录结构
-- 提供场景化导航表
-- 包含 AI 工作原则和常用命令
-- 提供规范要点和注意事项
+- 生成 CLAUDE.md 主索引文档（含行为准则 + AI工作原则 + 场景导航）
+- 创建 docs/ 目录下的配套子文档
+- 行为准则硬编码生成，确保任何项目获得一致的 CLAUDE.md
 
 ## 🚀 使用方法
 
@@ -71,7 +58,7 @@ agent-skills/
 ```
 ---
 name: <技能名称>           # 必须与目录名一致
-description: <简短描述>    # 说明技能用途
+description: <简短描述>    # 说明技能用途和触发场景
 ---
 
 # <技能标题>
@@ -79,20 +66,17 @@ description: <简短描述>    # 说明技能用途
 ## Description
 详细的功能描述
 
-## Triggers
-触发条件列表
-
-## Usage
-使用说明
-
 ## Instructions
-详细执行步骤
+执行步骤概要
 
-## Output Format
-输出格式说明
+## Prompt Template
+详细提示词模板
 
 ## Examples
 使用示例
+
+## Notes
+补充说明
 ```
 
 ### 命名规范
@@ -104,9 +88,9 @@ description: <简短描述>    # 说明技能用途
 ### 内容要求
 
 1. **清晰的范围定义** - 明确技能的功能边界
-2. **具体的触发条件** - 包含中英文触发词
-3. **详细的执行步骤** - Step-by-step 说明
-4. **格式化的输出** - 提供输出模板
+2. **触发词融入 description** - frontmatter description 是主要触发机制
+3. **Instructions 精简为概要** - 详细步骤放 Prompt Template
+4. **单一来源原则** - 同一约束只在一处定义，其他位置引用
 5. **实用的示例** - 展示典型使用场景
 
 ## 📝 添加新技能
