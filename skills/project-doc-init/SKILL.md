@@ -1,24 +1,24 @@
 ---
 name: project-doc-init
-description: 自动分析项目并生成AI友好的文档体系（CLAUDE.md + 配套子文档）。当用户需要初始化项目文档、创建CLAUDE.md、设置AI开发文档结构、或提到"项目文档"/"开发文档"/"初始化文档"时触发。
+description: 自动分析项目并生成AI友好的文档体系（AGENTS.md + 配套子文档）。当用户需要初始化项目文档、创建AGENTS.md、设置AI开发文档结构、或提到"项目文档"/"开发文档"/"初始化文档"时触发。
 ---
 
 # Project Doc Initializer
 
 ## Description
 
-自动分析项目，生成包含行为准则、场景化导航的 CLAUDE.md 及配套子文档。无需额外参数，直接激活即可。
+自动分析项目，生成包含行为准则、场景化导航的 AGENTS.md 及配套子文档。无需额外参数，直接激活即可。
 
 ## Instructions
 
 1. 分析项目：读取配置文件和目录结构，识别技术栈与架构特点
-2. 生成文档：按 Prompt Template 执行，输出 CLAUDE.md + docs/ 子文档
+2. 生成文档：按 Prompt Template 执行，输出 AGENTS.md + docs/ 子文档
 3. 交付结果：输出文件列表、完整文档内容
 
 **边界情况：**
 
 - 无法识别技术栈（无 package.json / go.mod 等）→ 只基于可确认的信息生成文档，不确定的部分向用户提问
-- 配置文件缺失 → 只生成基线文档（CLAUDE.md + PROJECT.md），不生成动态文档
+- 配置文件缺失 → 只生成基线文档（AGENTS.md + PROJECT.md），不生成动态文档
 
 ---
 
@@ -47,7 +47,7 @@ description: 自动分析项目并生成AI友好的文档体系（CLAUDE.md + �
 
 ### Step 2: 确定文档结构
 固定基线（所有项目必有）：
-1. CLAUDE.md（主索引）: 行为准则 + 技术栈概览 + 场景导航 + 常用命令
+1. AGENTS.md（主索引）: 行为准则 + 技术栈概览 + 场景导航 + 常用命令
 2. docs/PROJECT.md: 技术栈、目录结构、架构模式
 
 动态文档：根据 Step 1 分析结果，按 Step 3 判断逻辑决定是否拆分。
@@ -66,11 +66,11 @@ description: 自动分析项目并生成AI友好的文档体系（CLAUDE.md + �
 判断示例（展示推理过程，非固定映射）：
 - "项目有组件目录且组件间有复用关系" → 组件规范复杂度够，独立为 COMPONENT.md
 - "项目有数据层但只有2个简单表" → 数据模型复杂度不够，写入 PROJECT.md 即可
-- "项目是单文件脚本" → 只生成 CLAUDE.md，不拆 docs/
+- "项目是单文件脚本" → 只生成 AGENTS.md，不拆 docs/
 
 ### Step 4: 定义行为准则
 
- 以下内容必须原样嵌入 CLAUDE.md，不可省略、不可改写。
+ 以下内容必须原样嵌入 AGENTS.md，不可省略、不可改写。
 
  > ## 行为准则
  >
@@ -108,7 +108,7 @@ description: 自动分析项目并生成AI友好的文档体系（CLAUDE.md + �
 
 ### Step 5: 编写文档内容
 
-- CLAUDE.md: 行为准则（按 Step 4 原文） + 技术栈概览 + 场景导航表 + 常用命令 + 精简注意事项
+- AGENTS.md: 行为准则（按 Step 4 原文） + 技术栈概览 + 场景导航表 + 常用命令 + 精简注意事项
 - docs/PROJECT.md: 技术栈、目录结构、架构模式 + 不够独立文档的领域章节
 - 动态子文档: 仅在 Step 3 判断需要独立时生成，内容为规范要点 + 注意事项
 
@@ -122,7 +122,7 @@ description: 自动分析项目并生成AI友好的文档体系（CLAUDE.md + �
 
 ## 格式要求
 
-- CLAUDE.md 控制在 80-120 行（小项目偏下限，大项目偏上限）
+- AGENTS.md 控制在 80-120 行（小项目偏下限，大项目偏上限）
 - 子文档单文件不超过 200 行
 - 使用 Markdown 表格做导航
 - 注意事项精简为要点列表，不展开说明
@@ -140,7 +140,7 @@ description: 自动分析项目并生成AI友好的文档体系（CLAUDE.md + �
 
 **Input:** 初始化项目文档
 **Output:**
-- CLAUDE.md（行为准则 + 场景导航 + 常用命令）
+- AGENTS.md（行为准则 + 场景导航 + 常用命令）
 - docs/PROJECT.md（技术栈、目录结构）
 - docs/COMPONENT.md（改组件时需单独查阅组件规范）
 - docs/API.md（改接口时需单独查阅请求封装和错误处理约定）
@@ -149,7 +149,7 @@ description: 自动分析项目并生成AI友好的文档体系（CLAUDE.md + �
 
 **Input:** 请帮我创建这个项目的 AI 开发文档
 **Output:**
-- CLAUDE.md（行为准则 + 场景导航 + 常用命令）
+- AGENTS.md（行为准则 + 场景导航 + 常用命令）
 - docs/PROJECT.md（技术栈、目录结构 + CLI 参数说明合并于此，因内容简短）
 - （项目简单，领域信息不足独立文档价值，不生成额外子文档）
 
@@ -157,7 +157,7 @@ description: 自动分析项目并生成AI友好的文档体系（CLAUDE.md + �
 
 **Input:** 设置项目开发文档
 **Output:**
-- CLAUDE.md（行为准则 + 场景导航 + 常用命令）
+- AGENTS.md（行为准则 + 场景导航 + 常用命令）
 - docs/PROJECT.md（技术栈、目录结构、架构模式）
 - docs/API.md（改接口时需单独查阅接口约定）
 - docs/ARCHITECTURE.md（跨模块改动时需单独查阅架构决策）
@@ -169,8 +169,8 @@ description: 自动分析项目并生成AI友好的文档体系（CLAUDE.md + �
 
 - 技能会自动检测项目类型（Vue/React/Node/Go/Python 等）
 - 文档结构由项目特点驱动，不预设固定模板
-- 小项目可能只需 CLAUDE.md + docs/PROJECT.md，无需额外拆分
+- 小项目可能只需 AGENTS.md + docs/PROJECT.md，无需额外拆分
 - 文档路径使用相对路径，便于迁移
-- 行为准则由技能硬编码生成，确保任何项目都能获得一致的 CLAUDE.md
+- 行为准则由技能硬编码生成，确保任何项目都能获得一致的 AGENTS.md
 ```
 ````
