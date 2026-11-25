@@ -6,26 +6,31 @@ AI Agent 技能集合，为智能助手提供可扩展的专业能力。
 
 ```
 agent-skills/
-├── skills/                      # 技能目录
-│   └── project-doc-init/       # 项目文档初始化技能
-│       └── SKILL.md            # 技能定义文件
-├── LICENSE                      # MIT许可证
-└── README.md                    # 项目说明文档
+├── skills/                          # 技能目录
+│   └── project-docs/               # 项目文档维护技能
+│       ├── SKILL.md                # 技能定义文件
+│       └── references/
+│           ├── examples.md         # 输出示例（按需加载）
+│           └── profiles.md         # 仓库画像与文档档位（按需加载）
+├── LICENSE                          # MIT许可证
+└── README.md                        # 项目说明文档
 ```
 
 ## 🛠️ 可用技能
 
-### project-doc-init
+### project-docs
 
-**通用项目 AI 文档初始化技能**
+**通用项目文档技能（面向人类与 AI）**
 
-自动分析项目，生成包含行为准则、AI工作原则、场景化导航的 AGENTS.md 及配套子文档。适用于任何技术栈的项目。
+自动分析项目，生成或更新包含行为准则、场景化导航的 AGENTS.md 及配套子文档；按需生成 README 与 API 参考文档。适用于任何技术栈的项目。
 
 **功能特点：**
 
 - 自动识别技术栈（Vue/React/Node等）
 - 生成 AGENTS.md 主索引文档（含行为准则 + AI工作原则 + 场景导航）
 - 创建 docs/ 目录下的配套子文档
+- 按仓库画像选择 L1/L2/L3 文档档位：精简、团队、对外，默认最低档
+- 支持编写 README 与 API 参考文档：可单独生成，也可随项目文档任务一并产出
 - 行为准则硬编码生成，确保任何项目获得一致的 AGENTS.md
 
 ## 🚀 使用方法
@@ -81,7 +86,7 @@ description: <简短描述>    # 说明技能用途和触发场景
 
 ### 命名规范
 
-- 目录名：`kebab-case`（如 `project-doc-init`）
+- 目录名：`kebab-case`（如 `project-docs`）
 - YAML name：与目录名一致
 - 文件名：必须为 `SKILL.md`
 
