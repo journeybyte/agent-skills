@@ -11,6 +11,7 @@ agent-skills/
 │       ├── SKILL.md                # 技能定义文件
 │       └── references/
 │           ├── examples.md         # 输出示例（按需加载）
+│           ├── feedback.md         # 反馈格式（按需加载）
 │           └── profiles.md         # 仓库画像与文档档位（按需加载）
 ├── LICENSE                          # MIT许可证
 └── README.md                        # 项目说明文档

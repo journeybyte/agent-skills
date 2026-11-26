@@ -1,6 +1,6 @@
 # 仓库画像与文档档位
 
-先判画像，再按档位定文档清单。默认最低档，命中信号才升级；用户指定档位优先。信号冲突或无法确认时按 L1，并在交付摘要说明可升级项。
+先判画像，再按档位定文档清单。默认最低档，命中信号才升级；用户指定档位优先。信号冲突或无法确认时按 L1，并按 SKILL.md"反馈格式"第 1 项写可升级项。
 
 ## 1. 仓库类型
 
@@ -9,7 +9,7 @@
 | CLI | package.json `bin`，或单一可执行入口 | README 补命令、参数与示例 |
 | 库/SDK | `main` / `exports` / `types`，无 `bin` | README 补安装、用法示例、兼容矩阵；API 参考按导出面 |
 | 应用/服务 | `scripts.start`、框架依赖、Dockerfile 等部署配置 | README 补环境变量、部署与访问方式 |
-| monorepo | workspaces / pnpm-workspace / lerna / nx / turbo | 根 AGENTS.md + 按包边界拆分子文档；包内文档就近存放 |
+| monorepo | workspaces / pnpm-workspace / lerna / nx / turbo | 根 AGENTS.md + 按包边界拆分子文档；固定映射表按包分别执行，各包可有自己的同名领域文档，就近存放在包目录；包级概览写 `<package>/docs/PROJECT.md`，根导航表收录各包文档并写实际相对路径 |
 
 无配置文件时按目录与入口判断；仍无法确认时向用户提问，不猜。
 
@@ -17,12 +17,12 @@
 
 | 档位 | 触发信号 | 文档清单 |
 |---|---|---|
-| L1 精简（默认） | 无团队/对外信号 | AGENTS.md + docs/PROJECT.md + 按复杂度生成的领域文档 |
-| L2 团队 | 以下至少两项：CONTRIBUTING、CODEOWNERS、PR 模板、CI 工作流 | L1 + CONTRIBUTING.md；AGENTS 补代码风格、测试策略、安全边界；领域文档补示例与检查清单 |
-| L3 对外 | 用户明确开源/公开 API，或同时存在 SECURITY.md、CHANGELOG.md、发布配置 | L2 + README.md + SECURITY.md + CHANGELOG.md + docs/API_REFERENCE.md（有 API 时） |
+| L1 精简（默认） | 无团队/对外信号 | AGENTS.md + docs/PROJECT.md + 按 SKILL.md Step 3 固定映射表命中生成的领域文档 |
+| L2 团队 | 以下至少两项：CONTRIBUTING、CODEOWNERS、PR 模板、CI 工作流 | L1 + CONTRIBUTING.md；AGENTS 补代码风格、测试方式、安全边界；领域文档补示例与检查清单 |
+| L3 对外 | 用户明确开源/公开 API，或同时存在 SECURITY.md、CHANGELOG.md、发布配置（release workflow、npm publishConfig、发布脚本等） | L2 + README.md + SECURITY.md + CHANGELOG.md + docs/API_REFERENCE.md（有 API 时） |
 
 - 升级只补缺失项，不重写已有文档；用户可指定或降级档位。
-- 交付时列出档位、触发信号、未生成的升级项。
+- 交付时按 SKILL.md"反馈格式"的第 1 项列出档位、触发信号、未生成的升级项。
 
 ## 3. 档位文档要点
 
