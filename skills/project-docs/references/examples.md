@@ -1,6 +1,6 @@
 # 输出示例
 
-用于校准文档结构与产物粒度，按需读取，不随主流程常驻上下文。Step 编号见 `SKILL.md` 的 Prompt Template。Example 1–3 只展示产物结构，省略交付摘要；摘要完整格式见 Example 4、6、8、9。
+用于校准文档结构与产物粒度，按需读取，不随主流程常驻上下文。Step 编号见 `SKILL.md` 的 Prompt Template。Example 1–3 只展示产物结构，省略交付摘要；摘要完整格式见 Example 4、6、8–11。
 
 ## Example 1: Vue 前端项目
 
@@ -174,6 +174,56 @@
    - CONTRIBUTING.md [修订] — 补充环境准备与测试要求
 3. 变更依据：无
 4. 重写说明：无
+5. 降级与后续：无
+6. 问题清单：无
+```
+
+## Example 10: 初始化请求降级为更新（已有 AGENTS.md）
+
+**Context:** 项目已有 Example 1 生成的全套文档（AGENTS.md、docs/PROJECT.md、docs/COMPONENT.md、docs/API_CONVENTIONS.md）。用户要求"初始化项目文档"，但未含"从零重建/覆盖/重新生成"等显式重写词。用户未指出具体变更点。
+
+**Input:** 初始化项目文档
+**Output:**
+- 判定为更新模式：已有 AGENTS.md 且无显式重建词，"初始化"类请求默认降级按更新处理；交付摘要第 1 项注明
+- 变更点未确认：不向用户提问，以当前实际结构为准逐项对比现有文档（命中"更新模式下变更点无法确认"边界）
+- 本次对比确认 2 项差异：package.json 新增 1 个依赖、src/utils 新增目录
+- 只修订受影响章节，未动文件只列路径
+
+**交付摘要（更新，6 项）：**
+```
+1. 模式与档位：更新（用户要求初始化，已有 AGENTS.md，未显式要求重建，默认按更新处理）；L1；触发依据：用户"初始化项目文档"请求 + 已有 AGENTS.md；未生成升级项：无
+2. 文件状态：
+   - AGENTS.md [修订] — 技术栈概览补新增依赖
+   - docs/PROJECT.md [修订] — 目录结构同步 src/utils
+   - docs/COMPONENT.md [未动] — 只列路径
+   - docs/API_CONVENTIONS.md [未动] — 只列路径
+3. 变更依据：变更差异清单 2 项（新增依赖、新增 src/utils 目录）
+4. 重写说明：无
+5. 降级与后续：无
+6. 问题清单：无
+```
+
+## Example 11: 重写式初始化（显式要求从零重建）
+
+**Context:** 沿用 Example 1 的 Vue 项目。项目经过大量重构：目录大改、组件目录移除，现有文档与实际严重不符。用户明确要求重建。旧 docs/API_CONVENTIONS.md 中有一条手写规范（"接口错误码统一走 4xxx 段"），代码中无法直接确认该约定仍有效。
+
+**Input:** 文档太乱了，从零重建一套吧
+**Output:**
+- 判定为初始化模式（重写）：已含"从零重建"显式重写词
+- 先读取全部现有文档履行保真义务：手写的 4xxx 错误码规范无法从代码确认，向用户确认仍适用后迁移进新 docs/API_CONVENTIONS.md，标注来源为旧文档
+- 整体重写 AGENTS.md、docs/PROJECT.md、docs/API_CONVENTIONS.md，不以旧文档为基线，重写文件标 `[重写]`
+- docs/COMPONENT.md 对应的组件目录已移除、领域不存在 → 删除并移除导航条目
+
+**交付摘要（初始化（重写），6 项）：**
+```
+1. 模式与档位：初始化（重写）；L1；触发依据：用户显式要求"从零重建"；未生成升级项：无
+2. 文件状态：
+   - AGENTS.md [重写] — 按当前结构整体重新生成
+   - docs/PROJECT.md [重写] — 目录大改后重新生成
+   - docs/API_CONVENTIONS.md [重写] — 重新生成，迁移旧文档手写的错误码规范
+   - docs/COMPONENT.md [已删除] — 组件目录已移除，领域不再存在
+3. 变更依据：无
+4. 重写说明：AGENTS.md、docs/PROJECT.md、docs/API_CONVENTIONS.md — 大量目录/模块已变且用户显式要求从零重建
 5. 降级与后续：无
 6. 问题清单：无
 ```
