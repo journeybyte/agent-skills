@@ -14,6 +14,7 @@ agent-skills/
 │           ├── feedback.md         # 反馈格式（按需加载）
 │           └── profiles.md         # 仓库画像与文档档位（按需加载）
 ├── LICENSE                          # MIT许可证
+├── CHANGELOG.md                     # 技能更新说明
 └── README.md                        # 项目说明文档
 ```
 
